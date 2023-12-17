@@ -22,6 +22,6 @@ class BrandH2Adapter(private val repo: BrandRepository) : ModifyBrandPort {
     }
 
     @Transactional
-    override suspend fun deleteBrand(id: Int) =
-        repo.deleteById(id)
+    override suspend fun deleteBrand(brandId: Int) =
+        repo.deleteById(brandId)
 }

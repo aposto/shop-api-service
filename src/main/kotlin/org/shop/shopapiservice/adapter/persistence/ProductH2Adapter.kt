@@ -49,8 +49,8 @@ class ProductH2Adapter(private val repo: ProductRepository) :
             .let { null }
     }
 
-    override suspend fun deleteProduct(id: Int) {
-        return repo.deleteById(id)
+    override suspend fun deleteProduct(productId: Int) {
+        return repo.deleteById(productId)
     }
 
     private fun mapToDomain(e: ProductViewEntity) =

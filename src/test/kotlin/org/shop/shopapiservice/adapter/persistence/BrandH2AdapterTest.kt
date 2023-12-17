@@ -1,26 +1,27 @@
 package org.shop.shopapiservice.adapter.persistence
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import org.shop.shopapiservice.domain.commandFail
-import org.shop.shopapiservice.domain.commandOk
+import io.kotest.matchers.shouldNotBe
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.dao.DuplicateKeyException
 
 @SpringBootTest
 class BrandH2AdapterTest(val adapter: BrandH2Adapter) : FunSpec({
 
     test("createBrand") {
-        adapter.createBrand("SIMPLE") shouldBe commandOk()
-        adapter.createBrand("SIMPLE") shouldBe commandFail("DUPLICATED")
+        adapter.insertBrand("SIMPLE") shouldNotBe null
+        shouldThrow<DuplicateKeyException> {
+            adapter.insertBrand("SIMPLE")
+        }
     }
 
     test("updateBrand") {
-        adapter.updateBrand(1, "AA") shouldBe commandOk()
-        adapter.updateBrand(2, "SIMPLE") shouldBe commandFail("DUPLICATED")
+        adapter.saveBrand(1, "AA") shouldBe null
+        shouldThrow<DuplicateKeyException> {
+            adapter.saveBrand(2, "SIMPLE")
+        }
     }
 
-    test("deleteBrand") {
-        adapter.deleteBrand(1) shouldBe commandOk()
-        adapter.deleteBrand(200) shouldBe commandOk()
-    }
 })
