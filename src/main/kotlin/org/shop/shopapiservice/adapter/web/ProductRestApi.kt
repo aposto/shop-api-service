@@ -63,7 +63,10 @@ class ProductRestApi
     @ApiResponses(value = [ApiResponse(responseCode = "200", description = "카테고리 이름으로 최저, 최고 가격 브랜드와 상품 가격을 조회하는 API")])
     @GetMapping("/min-max-product/{category}")
     @ResponseBody
-    suspend fun getMinMaxProductByCategory(@PathVariable("category") category: String, response: ServerHttpResponse): MinMaxProductResponse {
+    suspend fun getMinMaxProductByCategory(
+        @PathVariable("category") category: String,
+        response: ServerHttpResponse
+    ): MinMaxProductResponse {
         require(category.isNotEmpty())
         return try {
             val result = categoryProductUseCase.getMinMaxProductByCategory(category)

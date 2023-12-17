@@ -2,7 +2,6 @@ package org.shop.shopapiservice.adapter.web
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
-import org.shop.shopapiservice.adapter.web.request.ModifyBrandRequest
 import org.shop.shopapiservice.adapter.web.request.ModifyProductRequest
 import org.shop.shopapiservice.application.port.usecase.ProductCommand
 import org.shop.shopapiservice.domain.*
@@ -39,15 +38,17 @@ class AdminProductRestApi(
         @PathVariable("productId") productId: Int, @RequestBody req: ModifyProductRequest,
     ): CommandBodyResult<Boolean> {
         return try {
-            commandBodyOk(productCommand.updateProduct(
-                ProductCore(id = productId, brandId = req.brandId, categoryId = req.categoryId, price = req.price)
-            ).success)
+            commandBodyOk(
+                productCommand.updateProduct(
+                    ProductCore(id = productId, brandId = req.brandId, categoryId = req.categoryId, price = req.price)
+                ).success
+            )
         } catch (t: Throwable) {
             commandBodyFail(t.message ?: "UNKNOWN")
         }
     }
 
-    @ApiResponses(value = [ApiResponse(responseCode = "200", description = "브랜드 수정")])
+    @ApiResponses(value = [ApiResponse(responseCode = "200", description = "상품 삭제")])
     @DeleteMapping("/{productId}")
     @ResponseBody
     suspend fun deleteBrand(
