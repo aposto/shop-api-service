@@ -1,7 +1,8 @@
 
 
 ## 개요
-JDK17 + SpringBoot 3.2.x + H2 with R2DBC 를 사용했습니다.
+JDK17 + SpringBoot 3.2.x + Kotlin, 
+H2 with R2DBC 를 사용했습니다.
 
 ## 저장소
 https://github.com/aposto/shop-api-service
