@@ -13,9 +13,7 @@ class ProductH2AdapterTest(private val adapter: ProductH2Adapter) : FunSpec({
 
     test("findMinPriceByCategory") {
         val products = adapter.findMinPriceByCategory().toList()
-        products.forEach {
-            println(it)
-        }
+
         products.size shouldBe allBrandSize
         products.distinctBy { it.category }.sumOf { it.price } shouldBe 34100
     }
